@@ -1,10 +1,4 @@
 /** @type {import("next").NextConfig} */
-const nextConfig = {
-  experimental: {
-    turbo: {
-      resolveExtensions: [".jsx", ".js", ".json"],
-    },
-  },
-};
+const nextConfig = {};
 
 module.exports = nextConfig;

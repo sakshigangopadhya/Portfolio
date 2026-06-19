@@ -139,7 +139,7 @@ export default function CosmicSphere() {
       0.1,
       2000
     );
-    camera.position.set(-10, 0, 22);
+    camera.position.set(window.innerWidth < 640 ? -4 : -10, 0, 22);
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,

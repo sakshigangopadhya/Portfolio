@@ -99,3 +99,50 @@
     border-color: v.$accent;
   }
 }
+
+@media (max-width: 639px) {
+  .hero {
+    padding: 0 1.25rem;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .name {
+    font-size: clamp(2rem, 10vw, 2.8rem);
+    letter-spacing: -0.025em;
+    max-width: 100%;
+    word-break: break-word;
+    text-align: center;
+  }
+
+  .tagline {
+    font-size: 0.95rem;
+    max-width: 100%;
+    text-align: center;
+    margin-top: 1.25rem;
+  }
+
+  .quote {
+    font-size: 0.82rem;
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+
+  .actions {
+    margin-top: 1.75rem;
+    justify-content: center;
+  }
+
+  .cta {
+    margin-top: 1.75rem;
+  }
+}

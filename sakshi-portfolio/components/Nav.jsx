@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import styles from "./Nav.module.scss";
 
@@ -14,6 +14,7 @@ const links = [
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const islandRef = useRef(null);
   const logoRef = useRef(null);
   const linkRefs = useRef([]);
@@ -29,18 +30,14 @@ export default function Nav() {
       const t = max > 0 ? Math.min(1, window.scrollY / max) : 0;
       if (!islandRef.current) return;
 
-      // Background: white glass -> dark charcoal glass
       const bgR = Math.round(255 - (255 - 28) * t);
       const bgG = Math.round(255 - (255 - 28) * t);
       const bgB = Math.round(255 - (255 - 36) * t);
       const bgAlpha = 0.82 + t * 0.15;
-      islandRef.current.style.background = `rgba(${bgR},${bgG},${bgB},${bgAlpha.toFixed(2)})`;
-      islandRef.current.style.borderColor = t > 0.5 ? `rgba(255,255,255,0.1)` : `rgba(255,255,255,0.9)`;
-      islandRef.current.style.boxShadow = `0 1px 1px rgba(0,0,0,${(0.03 + t*0.15).toFixed(2)}), 0 8px 24px rgba(0,0,0,${(0.08 + t*0.2).toFixed(2)}), inset 0 1px 0 rgba(255,255,255,${(0.6 - t*0.5).toFixed(2)})`;
+      islandRef.current.style.background = "rgba(" + bgR + "," + bgG + "," + bgB + "," + bgAlpha.toFixed(2) + ")";
+      islandRef.current.style.borderColor = t > 0.5 ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.9)";
+      islandRef.current.style.boxShadow = "0 1px 1px rgba(0,0,0," + (0.03 + t*0.15).toFixed(2) + "), 0 8px 24px rgba(0,0,0," + (0.08 + t*0.2).toFixed(2) + "), inset 0 1px 0 rgba(255,255,255," + (0.6 - t*0.5).toFixed(2) + ")";
 
-      // Text: sharp switch at 0.5 threshold for maximum contrast at all times
-      // Below 0.5: always dark charcoal (readable on white glass)
-      // Above 0.5: always near-white (readable on dark glass)
       const textColor = t > 0.5 ? "rgb(240, 241, 245)" : "rgb(42, 42, 46)";
       const linkColor = t > 0.5 ? "rgb(200, 202, 210)" : "rgb(85, 86, 92)";
 
@@ -53,18 +50,41 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", update);
   }, []);
 
+  const handleLinkClick = () => setMenuOpen(false);
+
   return (
-    <motion.header className={styles.navWrap} initial={{ y: -40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
-      <motion.nav ref={islandRef} className={`${styles.island} ${scrolled ? styles.islandCompact : ""}`} layout transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}>
-        <a href="#top" ref={logoRef} className={styles.logo}>Sakshi Gangopadhya</a>
-        <ul className={styles.links}>
-          {links.map((link, i) => (
-            <li key={link.href}>
-              <a href={link.href} ref={el => linkRefs.current[i] = el} className={styles.link}>{link.label}</a>
-            </li>
-          ))}
-        </ul>
-      </motion.nav>
-    </motion.header>
+    <>
+      <motion.header className={styles.navWrap} initial={{ y: -40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
+        <motion.nav ref={islandRef} className={"" + styles.island + " " + (scrolled ? styles.islandCompact : "")} layout transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}>
+          <a href="#top" ref={logoRef} className={styles.logo}>Sakshi Gangopadhya</a>
+          <ul className={styles.links}>
+            {links.map((link, i) => (
+              <li key={link.href}>
+                <a href={link.href} ref={el => linkRefs.current[i] = el} className={styles.link}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+          <button className={styles.hamburger} onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+            <span className={"" + styles.bar + " " + (menuOpen ? styles.barOpen1 : "")} />
+            <span className={"" + styles.bar + " " + (menuOpen ? styles.barOpen2 : "")} />
+            <span className={"" + styles.bar + " " + (menuOpen ? styles.barOpen3 : "")} />
+          </button>
+        </motion.nav>
+      </motion.header>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div className={styles.drawer} initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}>
+            <ul className={styles.drawerLinks}>
+              {links.map((link, i) => (
+                <motion.li key={link.href} initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.06 }}>
+                  <a href={link.href} className={styles.drawerLink} onClick={handleLinkClick}>{link.label}</a>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
