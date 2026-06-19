@@ -1,0 +1,17 @@
+﻿@use "../styles/mixins" as m;
+@use "../styles/variables" as v;
+
+.iconPill {
+  @include m.pill;
+}
+
+.textPill {
+  @include m.pill;
+}
+
+.icon {
+  width: 0.85rem;
+  height: 0.85rem;
+  filter: invert(1) brightness(1.4);
+  flex-shrink: 0;
+}

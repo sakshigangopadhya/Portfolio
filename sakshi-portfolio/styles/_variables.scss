@@ -1,0 +1,35 @@
+// Design tokens - single source of truth for color, type, spacing.
+// Light / premium quant aesthetic: cool off-white base, charcoal ink, one muted navy accent.
+// Dark counterparts below are applied via [data-theme="dark"] on <html>, driven by ScrollTheme.
+
+$bg: #f4f5f7;
+$bg-elevated: rgba(20, 20, 24, 0.03);
+$ink: #2a2a2e;
+$ink-soft: #55565c;
+$ink-faint: #8a8b91;
+$border: #d8d9dd;
+$accent: #1b2a4a;
+$accent-soft: rgba(27, 42, 74, 0.5);
+
+$bg-dark: #14151a;
+$ink-dark: #f4f5f7;
+$ink-soft-dark: #b8b9c0;
+$ink-faint-dark: #8a8b91;
+$border-dark: #33343a;
+$accent-dark: #7c8cff;
+
+$font-display: var(--font-display);
+$font-body: var(--font-body);
+$font-mono: var(--font-mono);
+$font-nav: var(--font-nav);
+
+$max-width: 1200px;
+$gutter: 1.5rem;
+$gutter-lg: 2.5rem;
+
+$radius-sm: 0.5rem;
+$radius-md: 1rem;
+$radius-lg: 1.5rem;
+
+$ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+$theme-transition: color 0.6s ease, border-color 0.6s ease, background-color 0.6s ease;

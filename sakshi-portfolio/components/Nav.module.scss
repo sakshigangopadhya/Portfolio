@@ -1,0 +1,69 @@
+@use "../styles/variables" as v;
+@use "../styles/mixins" as m;
+
+.navWrap {
+  position: fixed;
+  top: 1.5rem;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.island {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  width: auto;
+  max-width: calc(100vw - 3rem);
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow:
+    0 1px 1px rgba(20, 20, 24, 0.03),
+    0 8px 24px rgba(20, 20, 24, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.islandCompact {
+  padding: 0.6rem 1.5rem;
+}
+
+.logo {
+  font-family: v.$font-nav, sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  color: v.$ink;
+  white-space: nowrap;
+}
+
+.links {
+  display: none;
+  gap: 1.85rem;
+  align-items: center;
+
+  @media (min-width: 640px) {
+    display: flex;
+  }
+}
+
+.link {
+  font-family: v.$font-nav, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: v.$ink-soft;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

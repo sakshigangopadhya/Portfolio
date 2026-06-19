@@ -1,0 +1,101 @@
+@use "../styles/variables" as v;
+@use "../styles/mixins" as m;
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem v.$gutter 0;
+
+  @media (min-width: 640px) {
+    padding: 6rem v.$gutter-lg 0;
+  }
+}
+
+.inner {
+  @include m.content-width;
+}
+
+.quote {
+  font-family: v.$font-body, sans-serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--ink-soft-live, v.$ink-soft);
+  margin-bottom: 2rem;
+}
+
+.quoteAuthor {
+  font-style: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft-live, v.$ink-faint);
+}
+
+.name {
+  font-family: v.$font-body, sans-serif;
+  font-size: clamp(2.75rem, 7vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--ink-live, v.$ink);
+  max-width: 42rem;
+}
+
+.tagline {
+  margin-top: 2rem;
+  max-width: 36rem;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.6;
+  color: var(--ink-soft-live, v.$ink-soft);
+  min-height: 2.5em;
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 1px;
+  animation: blink 1s step-end infinite;
+  opacity: 0.6;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0; }
+}
+
+.actions {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.primaryBtn {
+  border-radius: 999px;
+  background: v.$accent;
+  color: #ffffff;
+  padding: 0.85rem 1.6rem;
+  font-family: v.$font-nav, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: opacity 0.25s v.$ease-out;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.secondaryBtn {
+  border-radius: 999px;
+  border: 1px solid var(--border-live, v.$border);
+  color: var(--ink-live, v.$ink);
+  padding: 0.85rem 1.6rem;
+  font-family: v.$font-nav, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: border-color 0.25s v.$ease-out;
+
+  &:hover {
+    border-color: v.$accent;
+  }
+}

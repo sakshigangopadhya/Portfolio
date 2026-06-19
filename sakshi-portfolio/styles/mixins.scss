@@ -1,0 +1,58 @@
+@use "./variables" as v;
+
+// Consistent vertical rhythm + horizontal gutter for every section.
+@mixin section-padding {
+  padding: 7rem v.$gutter;
+
+  @media (min-width: 640px) {
+    padding: 7rem v.$gutter-lg;
+  }
+}
+
+@mixin content-width {
+  max-width: v.$max-width;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+// Small uppercase mono label used for eyebrows, tags, status text.
+@mixin mono-tag {
+  font-family: v.$font-mono, monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+// Pill-shaped tag, used for skills/tech badges.
+@mixin pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid v.$border;
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  @include mono-tag;
+  font-size: 0.65rem;
+  color: v.$ink-soft;
+  background: #ffffff;
+  transition: border-color 0.25s v.$ease-out, color 0.25s v.$ease-out;
+
+  &:hover {
+    border-color: v.$accent;
+    color: v.$ink;
+  }
+}
+
+// Restrained text accent - used sparingly, never neon.
+@mixin accent-text {
+  color: v.$accent;
+}
+
+// Card surface for light theme - soft shadow rather than glow/backdrop-blur.
+@mixin card-panel {
+  background: #ffffff;
+  border: 1px solid v.$border;
+  border-radius: v.$radius-md;
+  box-shadow: 0 1px 2px rgba(20, 20, 24, 0.04), 0 8px 24px rgba(20, 20, 24, 0.04);
+}

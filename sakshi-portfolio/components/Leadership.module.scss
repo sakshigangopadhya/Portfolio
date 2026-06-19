@@ -1,0 +1,41 @@
+@use "../styles/variables" as v;
+@use "../styles/mixins" as m;
+
+.leadership {
+  @include m.section-padding;
+}
+
+.inner {
+  @include m.content-width;
+}
+
+.eyebrow {
+  @include m.mono-tag;
+  color: v.$accent;
+  margin-bottom: 2.5rem;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.item {
+  border-top: 1px solid color-mix(in srgb, white 10%, transparent);
+  padding-top: 2rem;
+  max-width: 42rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: v.$ink;
+}
+
+.description {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: color-mix(in srgb, v.$ink 85%, v.$ink-soft);
+}
